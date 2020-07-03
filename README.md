@@ -14,4 +14,4 @@ I found that recreating the YFYIAR flash game tests out your learnings since the
 - String Methods
 - Random Number Generation
 
-**NOTE: This project may not be a perfect recreation of the flash game. I am basing the code of this project from the C program that I have submitted during my bachelor's degree.
+**NOTE: This project may not be a perfect recreation of the flash game. I am basing the code of this project from the C program that I have submitted during my bachelor's degree.**
