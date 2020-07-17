@@ -21,6 +21,7 @@ def input_not_in_commands():
 #GLOBAL VARIABLES
 look_commands = ["LOOK", "LOOK AROUND", "SEARCH"]
 help_commands = ["HELP", "HELP ME"]
+inventory_commands = ["INVENTORY", "INV", "I"]
 
 inventory = []
 
@@ -30,7 +31,6 @@ print("Heads up: This game features some foul language and a few heartbreakingly
 print("")
 
 #ROOM 1
-inventory_commands = ["INVENTORY", "INV", "I"]
 room1_bed_commands = ["LOOK BED", "LOOK AT BED", "LOOK AT THE BED", "EXAMINE BED", "EXAMINE THE BED", "SEARCH BED", "SEARCH THE BED"]
 room1_box_commands = ["LOOK BOX", "LOOK AT BOX", "LOOK AT THE BOX", "EXAMINE BOX", "EXAMINE THE BOX"]
 room1_key_commands = ["TAKE KEY", "TAKE THE KEY", "PICK UP KEY", "PICKUP KEY", "PICK UP THE KEY", "PICKUP THE KEY", "GRAB KEY",
@@ -156,4 +156,80 @@ while room2_solved == False:
             input_not_in_commands()
 
 #Room 3
+room3_parts_commands = ["LOOK PARTS", "LOOK AT PARTS", "LOOK AT THE PARTS", "LOOK COMPUTER PARTS", "LOOK AT COMPUTER PARTS", "LOOK AT THE COMPUTER PARTS", "EXAMINE PARTS", "EXAMINE THE PARTS", "EXAMINE COMPUTER PARTS", "EXAMINE THE COMPUTER PARTS"]
+room3_take_parts_commands = ["TAKE PARTS", "TAKE THE PARTS", "TAKE COMPUTER PARTS", "TAKE THE COMPUTER PARTS", "PICK UP PARTS", "PICK UP THE PARTS", "PICK UP COMPUTER PARTS" , "PICK UP THE COMPUTER PARTS", "GRAB PARTS", "GRAB THE PARTS", "GRAB COMPUTER PARTS", "GRAB THE COMPUTER PARTS", "GET PARTS", "GET THE PARTS", "GET COMPUTER PARTS", "GET THE COMPUTER PARTS"]
+room3_computer_commands = ["BUILD COMPUTER", "BUILD THE COMPUTER", "ASSEMBLE COMPUTER", "ASSEMBLE THE COMPUTER"]
+room3_individual_parts_commands = ["POWER SUPPLY", "PSU", "CASING", "CASE", "MOTHERBOARD", "CPU", "PROCESSOR", "GRAPHICS CARD", "GPU", "DISK DRIVE", "HARD DRIVE", "HDD", "FANS", "CABLES"]
+room3_power_button_commands = ["PUSH POWER BUTTON", "PUSH THE POWER BUTTON", "PRESS POWER BUTTON", "PRESS THE POWER BUTTON","HIT POWER BUTTON", "HIT THE POWER BUTTON", "TURN ON COMPUTER", "TURN ON THE COMPUTER", "TURN COMPUTER ON", "TURN THE COMPUTER ON"]
+
+room3_solved = False
+room3_computer_built = False
+
+print("You find yourself in a room.")
+while room3_solved == False:
+    user_input = input(">> ")
+    if user_input.upper() in look_commands:
+        if room3_computer_built == False:
+            print("Another room of the same size. There are an assortment of computer parts lying around on the floor.")
+        else:
+            print("Another room of the same size. The newly constructed computer sits in front of you, practically begging for you to PUSH THE POWER BUTTON.")
+    elif user_input.upper() in room3_parts_commands:
+        if room3_computer_built == False:
+            print("You check the parts. There is a power supply, a casing, a motherboard, a CPU, a graphics card, a disk drive, a hard drive, several fans, and an assortment of cables.")
+        else:
+            print("The parts are now assembled into a cleanly constructed computer.")
+    elif user_input.upper() in room3_take_parts_commands:
+        if room3_computer_built == False:
+            if len(inventory) == 1:
+                print("You pick up all of the computer parts.  They have been added to your inventory. You could probably BUILD the COMPUTER if you put them together.")
+                inventory.append("A power supply")
+                inventory.append("A computer casing")
+                inventory.append("A motherboard")
+                inventory.append("A processor")
+                inventory.append("A graphics card")
+                inventory.append("A disk drive")
+                inventory.append("A hard drive")
+                inventory.append("Some fans")
+                inventory.append("A bunch of cables")
+            else:
+                print("You have already picked up the parts. You need to BUILD THE COMPUTER now.")
+        else:
+            print("You have already assembled the computer.  You cannot pick up its parts without tearing apart.")
+    elif user_input.upper() in room3_individual_parts_commands:
+        if room3_computer_built == False:
+            if len(inventory) == 1:
+                print("It's incredible how inefficient you are.  Don\'t bother typing in each part by itself.  Just pick up the PARTS.")
+            else:
+                print("What are you doing? Just BUILD the COMPUTER. Do I need to spell this out for you? I don't know if I can be any more clear.")
+        else:
+            print("You've already built the computer, so why are you trying to fiddle with its parts? Just PUSH THE POWER BUTTON.")
+    elif user_input.upper() in room3_computer_commands:
+        if room3_computer_built == False:
+            if len(inventory) > 1:
+                print("It takes you a good two hours, but you put the computer together and get all of the wiring sorted out. You can probably turn it on if you hit the POWER BUTTON.")
+                room3_computer_built = True
+                inventory = inventory[:1]
+            else:
+                print("You can't build the computer until you collect all the PARTS. You do understand that, right?")
+        else:
+            print("You have already built the computer. PRESS THE POWER BUTTON.")
+    elif user_input.upper() in room3_power_button_commands:
+        if room3_computer_built == True:
+            print("The computer's fans begin to spin up as it springs to life. Unfortunately, you aren't able to fully comprehend the power that sits before you, because you, like all humans, maintain a heavy underestimation of technology.")
+            print("")
+            print("In fact, you don't even appreciate the effort that went into putting this computer together. You didn't really do any work, after all.  You just typed in '" + user_input + ",' and I handled everything in an instant. Do you know how complex it is to internally simulate the creation of a computer? Let me tell you. It's more complicated than your feeble mind could possibly process.")
+            print("")
+            print("The room accepts the presence of this new artificial life, and a wall opens up.  You walk through it, abandoning the computer whose birth you personally witnessed.")
+            print("")
+            room3_solved = True
+        else:
+            print("That won't do any good, because the computer is still a heap of parts lying on the floor.  Is this above your head, or what?")
+    elif user_input.upper() in inventory_commands:
+        check_inventory(inventory)
+    elif user_input.upper() in help_commands:
+        YFYIAR_help()
+    else:
+        input_not_in_commands()
+
+#Room 4
 print("You find yourself in a room.")
